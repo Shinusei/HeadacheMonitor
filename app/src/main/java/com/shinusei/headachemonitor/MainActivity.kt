@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
@@ -40,10 +42,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HeadacheMonitorTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    DiceRollerApp()
+                Surface (
+                    modifier = Modifier.fillMaxSize(),
+                    //color = MaterialTheme.colorScheme.background
+                ){
+                    MainApp()
                 }
 
             }
@@ -53,7 +56,8 @@ class MainActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun DiceRollerApp() {
+fun MainApp() {
+
     DiceWithButtonAndImage(
         modifier = Modifier
             .wrapContentSize(Alignment.Center)
@@ -63,8 +67,18 @@ fun DiceRollerApp() {
                     stiffness = Spring.StiffnessLow
                 )
             )
-
+            .imePadding()
     )
+    Inputs(
+        modifier = Modifier
+            .wrapContentSize(Alignment.BottomCenter)
+            .fillMaxWidth()
+            .padding(15.dp)
+
+            .navigationBarsPadding() // Keep it above the navigation bar
+            .imePadding()
+    )
+
 }
 
 @Composable

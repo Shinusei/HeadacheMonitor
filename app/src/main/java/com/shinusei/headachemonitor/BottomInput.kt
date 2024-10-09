@@ -22,17 +22,17 @@ import androidx.compose.ui.unit.dp
 @Preview
 @Composable
 fun Inputs(modifier: Modifier = Modifier) {
-    var LowInput by remember { mutableStateOf("") }
-    var HighInput by remember { mutableStateOf("") }
-    var PulseInput by remember { mutableStateOf("") }
+    var lowInput by remember { mutableStateOf("") }
+    var highInput by remember { mutableStateOf("") }
+    var pulseInput by remember { mutableStateOf("") }
 
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         OutlinedTextField(
-            value = LowInput,
-            onValueChange = { LowInput = it },
+            value = lowInput,
+            onValueChange = { lowInput = it },
             label = { Text("Низ") },
             modifier = Modifier
                 .weight(1f),
@@ -43,8 +43,8 @@ fun Inputs(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.width(8.dp))
         OutlinedTextField(
-            value = HighInput,
-            onValueChange = { HighInput = it },
+            value = highInput,
+            onValueChange = { highInput = it },
             label = { Text("Верх") },
             modifier = Modifier
                 .weight(1f),
@@ -55,8 +55,8 @@ fun Inputs(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.width(20.dp))
         OutlinedTextField(
-            value = PulseInput,
-            onValueChange = { PulseInput = it },
+            value = pulseInput,
+            onValueChange = { pulseInput = it },
             label = { Text("Пульс") },
             modifier = Modifier
                 .weight(1f),

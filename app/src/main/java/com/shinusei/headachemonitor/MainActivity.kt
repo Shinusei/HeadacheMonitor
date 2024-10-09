@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainApp() {
 
-    DiceWithButtonAndImage(
+    CalButton(
         modifier = Modifier
             .wrapContentSize(Alignment.Center)
             .animateContentSize(
@@ -82,7 +82,7 @@ fun MainApp() {
 }
 
 @Composable
-fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
+fun CalButton(modifier: Modifier = Modifier) {
     var showModal by remember { mutableStateOf(false) }
     var selectedDate by remember { mutableStateOf<Long?>(null) }
 

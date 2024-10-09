@@ -76,7 +76,7 @@ fun MainApp() {
             .padding(15.dp)
 
             .navigationBarsPadding() // Keep it above the navigation bar
-            .imePadding()
+
     )
 
 }

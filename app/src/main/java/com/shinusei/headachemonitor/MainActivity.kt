@@ -41,9 +41,9 @@ class MainActivity : ComponentActivity() {
             HeadacheMonitorTheme {
                 Surface (
                     modifier = Modifier.fillMaxSize(),
-                    //color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background
                 ){
-                    MainApp()
+                    Panel()
                 }
 
             }

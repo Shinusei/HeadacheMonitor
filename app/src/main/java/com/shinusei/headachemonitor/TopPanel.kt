@@ -33,7 +33,8 @@ fun Panel() {
     ) { innerPadding ->
         Surface(modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)) {
+            .padding(innerPadding),
+            color = MaterialTheme.colorScheme.background) {
             MainApp()
         }
     }

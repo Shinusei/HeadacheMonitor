@@ -3,7 +3,6 @@ package com.shinusei.headachemonitor
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
@@ -32,19 +31,20 @@ fun Inputs(modifier: Modifier = Modifier) {
     ) {
         OutlinedTextField(
             value = lowInput,
-            onValueChange = { lowInput = it },
+            onValueChange = { newText -> lowInput = newText.filter { it.isDigit() }.take(3) },
             label = { Text("Низ") },
             modifier = Modifier
                 .weight(1f),
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
-            )
+            ),
+
         )
         Spacer(modifier = Modifier.width(8.dp))
         OutlinedTextField(
             value = highInput,
-            onValueChange = { highInput = it },
+            onValueChange = { newText -> highInput = newText.filter { it.isDigit() }.take(3) },
             label = { Text("Верх") },
             modifier = Modifier
                 .weight(1f),
@@ -56,7 +56,7 @@ fun Inputs(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.width(20.dp))
         OutlinedTextField(
             value = pulseInput,
-            onValueChange = { pulseInput = it },
+            onValueChange = { newText -> pulseInput = newText.filter { it.isDigit() }.take(3) },
             label = { Text("Пульс") },
             modifier = Modifier
                 .weight(1f),

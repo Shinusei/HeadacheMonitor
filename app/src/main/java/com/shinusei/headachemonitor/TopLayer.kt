@@ -1,10 +1,6 @@
 package com.shinusei.headachemonitor
 
-import android.R.attr.onClick
 import androidx.compose.animation.Crossfade
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,12 +14,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -36,8 +31,7 @@ fun Panel() {
     val primaryColor = MaterialTheme.colorScheme.primaryContainer
     SideEffect {
         systemUiController.setStatusBarColor(
-            color = primaryColor,
-            //darkIcons = false // Set to false if your top bar has a dark background
+            color = primaryColor
         )
     }
     Scaffold(

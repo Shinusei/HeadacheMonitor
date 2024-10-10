@@ -3,6 +3,7 @@ package com.shinusei.headachemonitor
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
@@ -38,7 +39,7 @@ fun DatePickersRow(modifier: Modifier){
             ),
         )
         Spacer(Modifier.width(10.dp))
-        TextField(
+        OutlinedTextField(
             value = StartRange,
             onValueChange = { newText -> StartRange = newText.filter { it.isDigit() } },
             label = { Text("Конец периода") },
@@ -48,6 +49,7 @@ fun DatePickersRow(modifier: Modifier){
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next
             ),
+            maxLines = 1
         )
     }
 }

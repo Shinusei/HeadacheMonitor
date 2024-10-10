@@ -19,12 +19,12 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainSurface() {
-    DatePickersRow(modifier = Modifier
+    /*DatePickersRow(modifier = Modifier
         .wrapContentSize(Alignment.TopCenter)
         .fillMaxWidth()
         .padding(15.dp)
         .navigationBarsPadding()
-    )
+    )*/
     //TODO: shower
     Inputs(
         modifier = Modifier

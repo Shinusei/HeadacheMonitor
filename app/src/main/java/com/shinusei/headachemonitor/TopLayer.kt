@@ -52,12 +52,12 @@ fun Panel() {
                             if (showFirst) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.rounded_lists_24),
-                                    contentDescription = "List Icon"
+                                    contentDescription = "Вид списка"
                                 )
                             } else {
                                 Icon(
                                     painter = painterResource(id = R.drawable.rounded_calendar_month_24),
-                                    contentDescription = "Calendar Icon"
+                                    contentDescription = "Вид календаря"
                                 )
                             }
                         }
@@ -79,7 +79,7 @@ fun Panel() {
             .fillMaxSize()
             .padding(innerPadding),
             color = MaterialTheme.colorScheme.background) {
-            MainApp()
+            MainSurface()
         }
     }
 

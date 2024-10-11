@@ -2,18 +2,21 @@ package com.shinusei.headachemonitor
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Absolute.Center
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBar
@@ -29,8 +32,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.core.content.res.TypedArrayUtils.getText
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,21 +53,17 @@ fun Panel() {
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            MediumTopAppBar(
+            TopAppBar(
                 colors = topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
-                title = {DatePickersRow(modifier = Modifier
-                    .wrapContentSize(Alignment.BottomCenter)
-                    //.fillMaxWidth()
-                    .padding(end=15.dp, bottom = 5.dp)
-                    //.navigationBarsPadding()
-                )},
+                title = {},
                 navigationIcon = {
                     var swapIcon by remember { mutableStateOf(false) }
-                    IconButton({swapIcon = !swapIcon}) {
+                    IconButton({ swapIcon = !swapIcon }) {
                         Crossfade(
+                            label = "Crossfade",
                             targetState = swapIcon,
                             animationSpec = tween(durationMillis = 300)
                         ) { showFirst ->
@@ -90,15 +90,30 @@ fun Panel() {
                     }
                 }
             )
-        }
-
+        },
+        floatingActionButton = {
+            LargeFloatingActionButton(
+                onClick = {
+                    var qwe = getText(R.bool.showInputDialog)
+                },
+                content = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.rounded_add_2_24),
+                        contentDescription = "Вид списка"
+                    )
+                },
+            )
+        },
+        floatingActionButtonPosition = FabPosition.Center
     ) { innerPadding ->
-        Surface(modifier = Modifier
-            .fillMaxSize()
-            .padding(innerPadding),
-            color = MaterialTheme.colorScheme.inverseOnSurface) {
+        Surface(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(innerPadding),
+            color = MaterialTheme.colorScheme.inverseOnSurface
+        ) {
             MainSurface()
         }
     }
-
 }
+

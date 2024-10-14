@@ -2,15 +2,8 @@ package com.shinusei.headachemonitor
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Arrangement.Absolute.Center
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -28,13 +21,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.res.TypedArrayUtils.getText
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,6 +34,7 @@ fun Panel() {
     val systemUiController = rememberSystemUiController()
     val primaryColor = MaterialTheme.colorScheme.primaryContainer
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    var openInputDialog = remember { mutableStateOf(false) }
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -75,7 +66,7 @@ fun Panel() {
                             } else {
                                 Icon(
                                     painter = painterResource(id = R.drawable.rounded_calendar_month_24),
-                                    contentDescription = "Вид календаря"
+                                    contentDescription = "Вид календарь"
                                 )
                             }
                         }
@@ -94,7 +85,7 @@ fun Panel() {
         floatingActionButton = {
             LargeFloatingActionButton(
                 onClick = {
-                    var qwe = getText(R.bool.showInputDialog)
+                    openInputDialog.value = true
                 },
                 content = {
                     Icon(
@@ -113,6 +104,16 @@ fun Panel() {
             color = MaterialTheme.colorScheme.inverseOnSurface
         ) {
             MainSurface()
+        }
+    }
+    when {
+        openInputDialog.value -> {
+            InputDialog(
+                onDismissRequest = { openInputDialog.value = false },
+                onConfirmation = {
+                    openInputDialog.value = false
+                },
+            )
         }
     }
 }

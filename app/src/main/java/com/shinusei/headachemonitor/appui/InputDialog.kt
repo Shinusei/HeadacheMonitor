@@ -1,4 +1,4 @@
-package com.shinusei.headachemonitor
+package com.shinusei.headachemonitor.appui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,7 +31,6 @@ fun InputDialog(onDismissRequest: () -> Unit,
     var lowInput by remember { mutableStateOf("") }
     var highInput by remember { mutableStateOf("") }
     var pulseInput by remember { mutableStateOf("") }
-
     Dialog(onDismissRequest = { onDismissRequest() }) {
         Card(
             modifier = Modifier

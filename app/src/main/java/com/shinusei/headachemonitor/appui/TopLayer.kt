@@ -1,4 +1,4 @@
-package com.shinusei.headachemonitor
+package com.shinusei.headachemonitor.appui
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
@@ -26,6 +26,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.shinusei.headachemonitor.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview

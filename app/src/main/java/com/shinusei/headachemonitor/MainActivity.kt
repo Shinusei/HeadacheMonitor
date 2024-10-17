@@ -3,6 +3,7 @@ package com.shinusei.headachemonitor
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.shinusei.headachemonitor.appui.Panel
 import com.shinusei.headachemonitor.ui.theme.HeadacheMonitorTheme
 
 

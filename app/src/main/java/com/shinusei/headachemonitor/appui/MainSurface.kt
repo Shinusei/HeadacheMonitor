@@ -1,4 +1,4 @@
-package com.shinusei.headachemonitor
+package com.shinusei.headachemonitor.appui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth

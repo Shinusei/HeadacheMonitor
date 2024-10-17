@@ -1,83 +1,67 @@
 package com.shinusei.headachemonitor.appui
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 import com.shinusei.headachemonitor.data.*
+import java.sql.Date
+import java.text.NumberFormat
 
-class ItemEntryViewModel(private val itemsRepository: Head) : ViewModel() {
+class ItemEntryViewModel(private val headachesRepository: HeadachesRepository) : ViewModel() {
 
-    /**
-     * Holds current item ui state
-     */
-    var itemUiState by mutableStateOf(ItemUiState())
+    var headacheUiState by mutableStateOf(HeadacheUiState())
         private set
 
-    /**
-     * Updates the [itemUiState] with the value provided in the argument. This method also triggers
-     * a validation for input values.
-     */
-    fun updateUiState(itemDetails: ItemDetails) {
-        itemUiState =
-            ItemUiState(itemDetails = itemDetails, isEntryValid = validateInput(itemDetails))
+    fun updateUiState(headacheDetails: HeadacheDetails) {
+        headacheUiState =
+            HeadacheUiState(headacheDetails = headacheDetails, isEntryValid = validateInput(headacheDetails))
     }
 
-    /**
-     * Inserts an [Item] in the Room database
-     */
     suspend fun saveItem() {
         if (validateInput()) {
-            itemsRepository.insertItem(itemUiState.itemDetails.toItem())
+            headachesRepository.insertItem(headacheUiState.headacheDetails.toItem())
         }
     }
 
-    private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
+    private fun validateInput(uiState: HeadacheDetails = headacheUiState.): Boolean {
         return with(uiState) {
             name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
         }
     }
 }
 
-/**
- * Represents Ui State for an Item.
- */
-data class ItemUiState(
-    val itemDetails: ItemDetails = ItemDetails(),
+data class HeadacheUiState(
+    val itemDetails: HeadacheDetails = HeadacheDetails(),
     val isEntryValid: Boolean = false
 )
 
-data class ItemDetails(
-    val id: Int = 0,
-    val name: String = "",
-    val price: String = "",
-    val quantity: String = "",
+data class HeadacheDetails(
+    val id: UShort = 0u,
+    val date: String = "",
+    val lowPressure: UShort = 0u,
+    val highPressure: UShort = 0u,
+    val pulse: UByte = 0u,
 )
 
-/**
- * Extension function to convert [ItemUiState] to [Item]. If the value of [ItemDetails.price] is
- * not a valid [Double], then the price will be set to 0.0. Similarly if the value of
- * [ItemUiState] is not a valid [Int], then the quantity will be set to 0
- */
-fun ItemDetails.toItem(): Item = Item(
+fun HeadacheDetails.toItem(): Headache = Headache(
     id = id,
-    name = name,
-    price = price.toDoubleOrNull() ?: 0.0,
-    quantity = quantity.toIntOrNull() ?: 0
+    date = date,
+    lowPressure = lowPressure,
+    highPressure =  highPressure,
+    pulse = pulse,
 )
 
-fun Item.formatedPrice(): String {
+fun Headache.formatedPrice(): String {
     return NumberFormat.getCurrencyInstance().format(price)
 }
 
-/**
- * Extension function to convert [Item] to [ItemUiState]
- */
-fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState(
-    itemDetails = this.toItemDetails(),
+fun Headache.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState(
+    headacheDetails = this.toItemDetails(),
     isEntryValid = isEntryValid
 )
 
-/**
- * Extension function to convert [Item] to [ItemDetails]
- */
-fun Item.toItemDetails(): ItemDetails = ItemDetails(
+fun Headache.toItemDetails(): HeadacheDetails = HeadacheDetails(
     id = id,
     name = name,
     price = price.toString(),

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Repository that provides insert, update, delete, and retrieve of [Headache] from a given data source.
  */
-interface HaedachesRepository {
+interface HeadachesRepository {
     /**
      * Retrieve all the items from the the given data source.
      */

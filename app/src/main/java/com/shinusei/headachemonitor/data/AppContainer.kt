@@ -3,7 +3,7 @@ package com.shinusei.headachemonitor.data
 import android.content.Context
 
 interface AppContainer {
-    val headacheRepository: HaedachesRepository
+    val headacheRepository: HeadachesRepository
 }
 
 /**
@@ -11,9 +11,9 @@ interface AppContainer {
  */
 class AppDataContainer(private val context: Context) : AppContainer {
     /**
-     * Implementation for [HaedachesRepository]
+     * Implementation for [HeadachesRepository]
      */
-    override val headacheRepository: HaedachesRepository by lazy{
+    override val headacheRepository: HeadachesRepository by lazy{
         OfflineHeadachesRepository(HeadacheDatabase.getDatabase(context).headacheDao())
     }
 }

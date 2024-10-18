@@ -24,15 +24,15 @@ class ItemEntryViewModel(private val headachesRepository: HeadachesRepository) :
         }
     }
 
-    private fun validateInput(uiState: HeadacheDetails = headacheUiState.): Boolean {
+    private fun validateInput(uiState: HeadacheDetails = headacheUiState.headacheDetails): Boolean {
         return with(uiState) {
-            name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
+            date.isNotBlank()
         }
     }
 }
 
 data class HeadacheUiState(
-    val itemDetails: HeadacheDetails = HeadacheDetails(),
+    val headacheDetails: HeadacheDetails = HeadacheDetails(),
     val isEntryValid: Boolean = false
 )
 
@@ -52,18 +52,15 @@ fun HeadacheDetails.toItem(): Headache = Headache(
     pulse = pulse,
 )
 
-fun Headache.formatedPrice(): String {
-    return NumberFormat.getCurrencyInstance().format(price)
-}
-
-fun Headache.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState(
-    headacheDetails = this.toItemDetails(),
+fun Headache.toHeadacheUiState(isEntryValid: Boolean = false): HeadacheUiState = HeadacheUiState (
+    headacheDetails = this.toHeadacheDetails(),
     isEntryValid = isEntryValid
 )
 
-fun Headache.toItemDetails(): HeadacheDetails = HeadacheDetails(
-    id = id,
-    name = name,
-    price = price.toString(),
-    quantity = quantity.toString()
+fun Headache.toHeadacheDetails(): HeadacheDetails = HeadacheDetails(
+    id = id.toUShort(),
+    date = date.toString(),
+    lowPressure = lowPressure.toUShort(),
+    highPressure =  highPressure.toUShort(),
+    pulse = pulse.toUByte(),
 )

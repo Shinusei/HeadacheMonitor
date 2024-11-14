@@ -17,7 +17,7 @@ fun MainSurface() {
     DatePickersRow(modifier = Modifier
         .wrapContentSize(Alignment.TopCenter)
         .fillMaxWidth()
-        .background(color = MaterialTheme.colorScheme.primaryContainer)
+        .background(color = MaterialTheme.colorScheme.background)
         .padding(start = 15.dp, end = 15.dp, bottom = 10.dp)
     )
     //TODO: shower

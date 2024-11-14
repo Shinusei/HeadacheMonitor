@@ -33,7 +33,7 @@ import com.shinusei.headachemonitor.R
 @Composable
 fun Panel() {
     val systemUiController = rememberSystemUiController()
-    val primaryColor = MaterialTheme.colorScheme.primaryContainer
+    val primaryColor = MaterialTheme.colorScheme.surface
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     var openInputDialog = remember { mutableStateOf(false) }
 
@@ -47,8 +47,8 @@ fun Panel() {
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground,
                 ),
                 title = {},
                 navigationIcon = {

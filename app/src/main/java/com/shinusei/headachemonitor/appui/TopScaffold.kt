@@ -27,11 +27,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.shinusei.headachemonitor.R
+import com.shinusei.headachemonitor.db.NotesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun Panel() {
+fun Panel(viewModel: NotesViewModel) {
     val systemUiController = rememberSystemUiController()
     val primaryColor = MaterialTheme.colorScheme.surface
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()

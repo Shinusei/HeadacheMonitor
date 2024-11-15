@@ -41,7 +41,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -58,7 +57,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
-
+    //room
     implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")

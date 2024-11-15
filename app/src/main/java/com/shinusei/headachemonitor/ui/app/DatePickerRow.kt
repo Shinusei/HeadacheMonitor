@@ -21,6 +21,10 @@ import androidx.compose.ui.unit.dp
  * Компонуемый элемент, представляющий строку с двумя полями ввода для выбора диапазона дат.
  *
  * Этот элемент содержит два [OutlinedTextField] для ввода начала и конца периода.
+ *
+ * @see Row
+ * @see OutlinedTextField
+ * @see Spacer
  */
 @Composable
 fun DatePickersRow(modifier: Modifier) {
@@ -28,11 +32,11 @@ fun DatePickersRow(modifier: Modifier) {
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        var StartRange by remember { mutableStateOf("") }
+        var startRange by remember { mutableStateOf("") }
 
         OutlinedTextField(
-            value = StartRange,
-            onValueChange = { newText -> StartRange = newText.filter { it.isDigit() } },
+            value = startRange,
+            onValueChange = { newText -> startRange = newText.filter { it.isDigit() } },
             label = { Text("Начало периода") },
             modifier = Modifier
                 .weight(1f),
@@ -43,8 +47,8 @@ fun DatePickersRow(modifier: Modifier) {
         )
         Spacer(Modifier.width(10.dp))
         OutlinedTextField(
-            value = StartRange,
-            onValueChange = { newText -> StartRange = newText.filter { it.isDigit() } },
+            value = startRange,
+            onValueChange = { newText -> startRange = newText.filter { it.isDigit() } },
             label = { Text("Конец периода") },
             modifier = Modifier
                 .weight(1f),

@@ -8,7 +8,8 @@ import java.util.Date
 data class Notes(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val title: String,
-    val description: String,
-    val date: Date
+    val date: Date,
+    val lowPressure: Int,
+    val highPressure: Int,
+    val Pulse: Int
 )

@@ -13,13 +13,14 @@ class NotesViewModel : ViewModel() {
     val notesDao = MainApplication.notesDatabase.getNotesDao()
     val AllNotes: LiveData<List<Notes>> = notesDao.getAllNotes()
 
-    fun addNotes(title: String, description: String) {
+    fun addNotes(lowPressure: Int, highPressure: Int, pulse: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.addNotes(
                 Notes(
-                    title = title,
-                    description = description,
-                    date = Date.from(Instant.now())
+                    date = Date.from(Instant.now()),
+                    lowPressure = lowPressure,
+                    highPressure = highPressure,
+                    Pulse = pulse
                 )
             )
         }

@@ -1,4 +1,4 @@
-package com.shinusei.headachemonitor.appui
+package com.shinusei.headachemonitor.ui.app
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
@@ -24,11 +24,24 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.shinusei.headachemonitor.R
 import com.shinusei.headachemonitor.db.NotesViewModel
 
+/**
+ * Компонуемый элемент, представляющий основную панель приложения.
+ *
+ * Этот элемент содержит TopAppBar, FloatingActionButton и Surface для отображения основного контента.
+ * Он также управляет состоянием диалогового окна ввода.
+ *
+ * @param viewModel экземпляр [NotesViewModel], используемый для доступа к данным и логике приложения.
+ *
+ * @see NotesViewModel
+ * @see TopAppBar
+ * @see LargeFloatingActionButton
+ * @see Surface
+ * @see InputDialog
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Panel(viewModel: NotesViewModel) {

@@ -1,4 +1,4 @@
-package com.shinusei.headachemonitor.appui
+package com.shinusei.headachemonitor.ui.app
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,6 +17,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
+/**
+ * Компонуемый элемент, представляющий строку с двумя полями ввода для выбора диапазона дат.
+ *
+ * Этот элемент содержит два [OutlinedTextField] для ввода начала и конца периода.
+ */
 @Composable
 fun DatePickersRow(modifier: Modifier) {
     Row(

@@ -1,4 +1,4 @@
-package com.shinusei.headachemonitor.appui
+package com.shinusei.headachemonitor.ui.app
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,6 +25,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 
+/**
+ * Компонуемый элемент, представляющий диалоговое окно ввода.
+ *
+ * Этот диалог содержит три поля ввода: "Нижнее давление", "Верхнее давление" и "Пульс",
+ * а также кнопки "Dismiss" и "Confirm".
+ *
+ * @param onDismissRequest функция, вызываемая при нажатии кнопки "Dismiss" или при нажатии вне диалога.
+ * @param onConfirmation функция, вызываемая при нажатии кнопки "Confirm".
+ */
 @Composable
 fun InputDialog(onDismissRequest: () -> Unit,
                 onConfirmation: () -> Unit) {

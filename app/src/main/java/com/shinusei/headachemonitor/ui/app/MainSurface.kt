@@ -1,4 +1,4 @@
-package com.shinusei.headachemonitor.appui
+package com.shinusei.headachemonitor.ui.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +11,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * Компонуемый элемент, представляющий основную поверхность экрана.
+ *
+ * Этот элемент содержит строку выбора дат ([DatePickersRow]) и заполнитель для будущего элемента "shower".
+ *
+ * @see DatePickersRow
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainSurface() {

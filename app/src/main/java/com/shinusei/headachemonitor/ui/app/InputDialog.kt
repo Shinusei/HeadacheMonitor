@@ -24,6 +24,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.shinusei.headachemonitor.db.Converters
+import com.shinusei.headachemonitor.db.NotesViewModel
 
 /**
  * Компонуемый элемент, представляющий диалоговое окно ввода.
@@ -35,8 +37,7 @@ import androidx.compose.ui.window.Dialog
  * @param onConfirmation функция, вызываемая при нажатии кнопки "Confirm".
  */
 @Composable
-fun InputDialog(onDismissRequest: () -> Unit,
-                onConfirmation: () -> Unit) {
+fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, viewModel: NotesViewModel) {
     var lowInput by remember { mutableStateOf("") }
     var highInput by remember { mutableStateOf("") }
     var pulseInput by remember { mutableStateOf("") }
@@ -108,7 +109,18 @@ fun InputDialog(onDismissRequest: () -> Unit,
                     Text("Dismiss")
                 }
                 TextButton(
-                    onClick = { onConfirmation() },
+                    onClick = {
+                        viewModel.addNotes(
+                            //data,
+                            lowInput.toInt(),
+                            highInput.toInt(),
+                            pulseInput.toInt()
+                        )
+                        lowInput = ""
+                        highInput = ""
+                        pulseInput = ""
+                        onConfirmRequest()
+                    },
                     modifier = Modifier.padding(8.dp),
                 ) {
                     Text("Confirm")

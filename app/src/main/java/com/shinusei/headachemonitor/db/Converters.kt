@@ -13,4 +13,9 @@ class Converters {
     fun toDate(time: Long) : Date {
         return Date(time)
     }
+
+    @TypeConverter
+    fun toInt(string: String) : Int {
+        return string.toInt()
+    }
 }

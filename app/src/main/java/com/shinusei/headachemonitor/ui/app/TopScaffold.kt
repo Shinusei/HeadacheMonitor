@@ -124,9 +124,8 @@ fun Panel(viewModel: NotesViewModel) {
         openInputDialog.value -> {
             InputDialog(
                 onDismissRequest = { openInputDialog.value = false },
-                onConfirmation = {
-                    openInputDialog.value = false
-                },
+                onConfirmRequest = { openInputDialog.value = false },
+                viewModel = viewModel
             )
         }
     }

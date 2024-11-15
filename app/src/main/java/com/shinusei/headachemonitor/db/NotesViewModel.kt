@@ -9,7 +9,6 @@ import java.time.Instant
 import java.util.Date
 
 class NotesViewModel : ViewModel() {
-
     val notesDao = MainApplication.notesDatabase.getNotesDao()
     val AllNotes: LiveData<List<Notes>> = notesDao.getAllNotes()
 
@@ -31,5 +30,4 @@ class NotesViewModel : ViewModel() {
             notesDao.deleteNotes(id)
         }
     }
-
 }

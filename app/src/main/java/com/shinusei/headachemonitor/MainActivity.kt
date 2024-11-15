@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.ViewModelProvider
-import com.shinusei.headachemonitor.ui.app.Panel
 import com.shinusei.headachemonitor.db.NotesViewModel
+import com.shinusei.headachemonitor.ui.app.Panel
 import com.shinusei.headachemonitor.ui.theme.HeadacheMonitorTheme
 
 /**

@@ -24,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.shinusei.headachemonitor.R
 import com.shinusei.headachemonitor.db.NotesViewModel
 
@@ -45,16 +44,10 @@ import com.shinusei.headachemonitor.db.NotesViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Panel(viewModel: NotesViewModel) {
-    val systemUiController = rememberSystemUiController()
     val primaryColor = MaterialTheme.colorScheme.surface
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     var openInputDialog = remember { mutableStateOf(false) }
 
-    SideEffect {
-        systemUiController.setStatusBarColor(
-            color = primaryColor
-        )
-    }
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {

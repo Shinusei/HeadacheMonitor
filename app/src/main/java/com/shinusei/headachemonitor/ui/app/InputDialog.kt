@@ -24,7 +24,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.shinusei.headachemonitor.db.Converters
 import com.shinusei.headachemonitor.db.NotesViewModel
 
 /**

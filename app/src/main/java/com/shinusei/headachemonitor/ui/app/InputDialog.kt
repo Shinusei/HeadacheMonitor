@@ -27,13 +27,13 @@ import androidx.compose.ui.window.Dialog
 import com.shinusei.headachemonitor.db.NotesViewModel
 
 /**
- * Компонуемый элемент, представляющий диалоговое окно ввода.
+ * Input dialog
  *
- * Этот диалог содержит три поля ввода: "Нижнее давление", "Верхнее давление" и "Пульс",
- * а также кнопки "Dismiss" и "Confirm".
- *
- * @param onDismissRequest функция, вызываемая при нажатии кнопки "Dismiss" или при нажатии вне диалога.
- * @param onConfirmation функция, вызываемая при нажатии кнопки "Confirm".
+ * @param onDismissRequest
+ * @param onConfirmRequest
+ * @param viewModel
+ * @receiver
+ * @receiver
  */
 @Composable
 fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, viewModel: NotesViewModel) {

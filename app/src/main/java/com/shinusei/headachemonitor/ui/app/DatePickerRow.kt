@@ -18,13 +18,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 /**
- * Компонуемый элемент, представляющий строку с двумя полями ввода для выбора диапазона дат.
+ * Date pickers row
  *
- * Этот элемент содержит два [OutlinedTextField] для ввода начала и конца периода.
- *
- * @see Row
- * @see OutlinedTextField
- * @see Spacer
+ * @param modifier
  */
 @Composable
 fun DatePickersRow(modifier: Modifier) {

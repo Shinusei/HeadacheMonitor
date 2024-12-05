@@ -8,10 +8,22 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 
+/**
+ * Notes view model
+ *
+ * @constructor Create empty Notes view model
+ */
 class NotesViewModel : ViewModel() {
     val notesDao = MainApplication.notesDatabase.getNotesDao()
     val AllNotes: LiveData<List<Notes>> = notesDao.getAllNotes()
 
+    /**
+     * Add notes
+     *
+     * @param lowPressure
+     * @param highPressure
+     * @param pulse
+     */
     fun addNotes(lowPressure: Int, highPressure: Int, pulse: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.addNotes(
@@ -25,6 +37,11 @@ class NotesViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Delete notes
+     *
+     * @param id
+     */
     fun deleteNotes(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.deleteNotes(id)

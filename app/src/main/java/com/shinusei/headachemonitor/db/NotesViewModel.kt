@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
@@ -15,7 +16,7 @@ import java.util.Date
  */
 class NotesViewModel : ViewModel() {
     val notesDao = MainApplication.notesDatabase.getNotesDao()
-    val AllNotes: LiveData<List<Notes>> = notesDao.getAllNotes()
+    val allNotes: LiveData<List<Notes>> = notesDao.getAllNotes()
 
     /**
      * Add notes
@@ -31,10 +32,13 @@ class NotesViewModel : ViewModel() {
                     date = Date.from(Instant.now()),
                     lowPressure = lowPressure,
                     highPressure = highPressure,
-                    Pulse = pulse
+                    pulse = pulse
                 )
             )
         }
+    }
+    fun getAllNotes(): Flow<List<Notes>> {
+        return notesDao.getAllRecords()
     }
 
     /**

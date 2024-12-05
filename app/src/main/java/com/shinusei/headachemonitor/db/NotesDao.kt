@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Notes dao
@@ -35,4 +36,7 @@ interface NotesDao {
      */
     @Query("DELETE FROM Notes WHERE id = :id")
     fun deleteNotes(id: Int)
+
+    @Query("SELECT * FROM Notes")
+    fun getAllRecords(): Flow<List<Notes>>
 }

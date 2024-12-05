@@ -11,7 +11,7 @@ import java.util.Date
  * @property date
  * @property lowPressure
  * @property highPressure
- * @property Pulse
+ * @property pulse
  * @constructor Create empty Notes
  */
 @Entity
@@ -21,5 +21,5 @@ data class Notes(
     val date: Date,
     val lowPressure: Int,
     val highPressure: Int,
-    val Pulse: Int
+    val pulse: Int
 )

@@ -109,7 +109,9 @@ fun Panel(viewModel: NotesViewModel) {
                 .padding(innerPadding),
             color = MaterialTheme.colorScheme.inverseOnSurface
         ) {
-            MainSurface()
+            MainSurface(
+                viewModel = viewModel
+            )
         }
     }
     when {

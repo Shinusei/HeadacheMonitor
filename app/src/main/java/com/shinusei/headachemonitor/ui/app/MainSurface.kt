@@ -21,7 +21,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -35,7 +34,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.shinusei.headachemonitor.R
 import com.shinusei.headachemonitor.db.NotesViewModel
-import java.util.Collections.swap
 import java.util.Date
 import java.util.Locale
 
@@ -49,7 +47,10 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainSurface(viewModel: NotesViewModel) {
-    val dataList = viewModel.getAllNotes().collectAsState(initial = emptyList())
+    var startRange by remember { mutableStateOf<Long?>(null) }
+    var showDatePickerStart = remember { mutableStateOf(false) }
+    var endRange by remember { mutableStateOf<Long?>(null) }
+    var showDatePickerEnd = remember { mutableStateOf(false) }
 
     Column {
         Row(
@@ -60,10 +61,6 @@ fun MainSurface(viewModel: NotesViewModel) {
                 .padding(start = 15.dp, end = 15.dp, bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            var startRange by remember { mutableStateOf<Long?>(null) }
-            var showDatePickerStart = remember { mutableStateOf(false) }
-            var endRange by remember { mutableStateOf<Long?>(null) }
-            var showDatePickerEnd = remember { mutableStateOf(false) }
 
             OutlinedTextField(
                 value = startRange?.let { convertMillisToDate(it) } ?: "",
@@ -138,6 +135,7 @@ fun MainSurface(viewModel: NotesViewModel) {
             }
         }
         HorizontalDivider(modifier = Modifier.fillMaxWidth())
+        val dataList = viewModel.getAllNotes(startRange, endRange).collectAsState(initial = emptyList())
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -148,13 +146,13 @@ fun MainSurface(viewModel: NotesViewModel) {
                 val simpleDateFormat = SimpleDateFormat(
                     "EEEE",
                     Locale("ru", "RU")
-                ) // "EEEE" pattern for full day name
+                )
                 val dayOfWeekString = simpleDateFormat.format(data)
 
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Column {
                         Text(
-                            text = "${convertMillisToDate(data.time)}  ${dayOfWeekString}",
+                            text = "${convertMillisToDate(data.time)}  $dayOfWeekString",
                             style = MaterialTheme.typography.headlineSmall,
                             modifier = Modifier
                                 .padding(bottom = 8.dp, top = 8.dp, start = 5.dp)
@@ -192,7 +190,7 @@ fun MainSurface(viewModel: NotesViewModel) {
                                         .wrapContentSize(Alignment.CenterEnd)
                                 )
                                 Text(
-                                    text = "${dataList.value[note].lowPressure}",
+                                    text = "${if(dataList.value[note].lowPressure==-1) "-" else (dataList.value[note].lowPressure) } ",
                                     style = MaterialTheme.typography.titleLarge,
                                     modifier = Modifier
                                         .padding(start = 5.dp, bottom = 5.dp)
@@ -200,14 +198,14 @@ fun MainSurface(viewModel: NotesViewModel) {
                             }
                             Column {
                                 Text(
-                                    text = " pulse",
+                                    text = " пульс",
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = Modifier
                                         .padding(start = 8.dp)
                                         .wrapContentSize(Alignment.CenterEnd)
                                 )
                                 Text(
-                                    text = " ${dataList.value[note].pulse}",
+                                    text = " ${if(dataList.value[note].pulse==-1) "-" else (dataList.value[note].pulse) } ",
                                     style = MaterialTheme.typography.titleLarge,
                                     modifier = Modifier
                                         .padding(start = 5.dp, bottom = 5.dp)

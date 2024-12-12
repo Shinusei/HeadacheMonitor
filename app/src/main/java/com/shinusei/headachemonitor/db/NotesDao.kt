@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 /**
  * Notes dao
@@ -13,14 +14,6 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface NotesDao {
-    /**
-     * Get all notes
-     *
-     * @return
-     */
-    @Query("SELECT * FROM Notes")
-    fun getAllNotes(): LiveData<List<Notes>>
-
     /**
      * Add notes
      *
@@ -39,4 +32,13 @@ interface NotesDao {
 
     @Query("SELECT * FROM Notes")
     fun getAllRecords(): Flow<List<Notes>>
+
+    @Query("SELECT * FROM Notes WHERE date BETWEEN :startDate AND :endDate")
+    fun getRecords(startDate: Date, endDate: Date): Flow<List<Notes>>
+
+    @Query("SELECT * FROM Notes WHERE date < :endDate")
+    fun getRecordsEnd(endDate: Date): Flow<List<Notes>>
+
+    @Query("SELECT * FROM Notes WHERE date > :startDate")
+    fun getRecordsStart(startDate: Date): Flow<List<Notes>>
 }

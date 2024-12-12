@@ -3,6 +3,7 @@ package com.shinusei.headachemonitor.db
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.shinusei.headachemonitor.ui.app.convertMillisToDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -17,7 +18,6 @@ import java.util.Date
  */
 class NotesViewModel : ViewModel() {
     val notesDao = MainApplication.notesDatabase.getNotesDao()
-    val allNotes: LiveData<List<Notes>> = notesDao.getAllNotes()
 
     /**
      * Add notes
@@ -54,8 +54,16 @@ class NotesViewModel : ViewModel() {
             )
         }
     }
-    fun getAllNotes(): Flow<List<Notes>> {
-        return notesDao.getAllRecords()
+    fun getAllNotes(startRange: Long?, endRange: Long?): Flow<List<Notes>> {
+        if (startRange == null && endRange == null) {
+            return notesDao.getAllRecords()
+        } else if (startRange != null && endRange == null) {
+            return notesDao.getRecordsStart(Date(startRange))
+        } else if (startRange == null && endRange != null) {
+            return notesDao.getRecordsEnd(Date(endRange))
+        } else {
+            return notesDao.getRecords(Date(startRange!!), Date(endRange!!))
+        }
     }
 
     /**

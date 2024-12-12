@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 
+
 /**
  * Notes view model
  *
@@ -25,14 +26,30 @@ class NotesViewModel : ViewModel() {
      * @param highPressure
      * @param pulse
      */
-    fun addNotes(lowPressure: Int, highPressure: Int, pulse: Int) {
+    fun addNotes(dateInput: Long?, lowPressure: String, highPressure: String, pulse: String) {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.addNotes(
                 Notes(
-                    date = Date.from(Instant.now()),
-                    lowPressure = lowPressure,
-                    highPressure = highPressure,
-                    pulse = pulse
+                    date = if (dateInput == null) {
+                        Date.from(Instant.now())
+                    } else {
+                        Date(dateInput)
+                    },
+                    lowPressure = if (lowPressure == ""){
+                        -1
+                    } else {
+                        lowPressure.toInt()
+                    },
+                    highPressure = if (highPressure == ""){
+                        -1
+                    } else {
+                        highPressure.toInt()
+                    },
+                    pulse = if (pulse == ""){
+                        -1
+                    } else {
+                        pulse.toInt()
+                    }
                 )
             )
         }

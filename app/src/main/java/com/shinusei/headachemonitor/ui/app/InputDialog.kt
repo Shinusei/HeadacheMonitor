@@ -10,7 +10,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -40,6 +44,8 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
     var lowInput by remember { mutableStateOf("") }
     var highInput by remember { mutableStateOf("") }
     var pulseInput by remember { mutableStateOf("") }
+    var dateInput by remember { mutableStateOf<Long?>(null) }
+    var showDatePickerInput = remember { mutableStateOf(false) }
     Dialog(onDismissRequest = { onDismissRequest() }) {
         Card(
             modifier = Modifier
@@ -48,11 +54,53 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
                 .padding(5.dp),
             shape = RoundedCornerShape(16.dp),
         ) {
-
             Column(
                 Modifier.padding(10.dp)
             ) {
+                OutlinedTextField(
+                    value = dateInput?.let { convertMillisToDate(it) } ?: "",
+                    onValueChange = {  },
+                    label = { Text("От") },
+                    readOnly = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 1,
+                    trailingIcon = {
+                        IconButton(onClick = {
+                            showDatePickerInput.value = !showDatePickerInput.value
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.DateRange,
+                                contentDescription = "Select date"
+                            )
+                        }
+                    },
+                )
+                when {
+                    (showDatePickerInput.value) -> {
+                        DatePickerModal(
+                            onDateSelected = {
+                                dateInput = it
+                            },
+                            onDismiss = {
+                                showDatePickerInput.value = false
+                            }
+                        )
+                    }
+                }
                 Row {
+                    OutlinedTextField(
+                        value = highInput,
+                        onValueChange = { newText ->
+                            highInput = newText.filter { it.isDigit() }.take(3)
+                        },
+                        label = { Text("Верх") },
+                        modifier = Modifier.weight(1f),
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        )
+                    )
+                    Spacer(Modifier.width(10.dp))
                     OutlinedTextField(
                         value = lowInput,
                         onValueChange = { newText ->
@@ -67,31 +115,20 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
                     )
                     Spacer(Modifier.width(10.dp))
                     OutlinedTextField(
-                        value = highInput,
+                        value = pulseInput,
                         onValueChange = { newText ->
-                            highInput = newText.filter { it.isDigit() }.take(3)
+                            pulseInput = newText.filter { it.isDigit() }.take(3)
                         },
-                        label = { Text("Верх") },
+                        label = { Text("Пульс") },
                         modifier = Modifier.weight(1f),
+                        //colors = OutlinedTextFieldDefaults.colors(unfocusedBorderColor = Color(0xFF000000)),
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
+                            imeAction = ImeAction.Done
                         )
                     )
                 }
-                OutlinedTextField(
-                    value = pulseInput,
-                    onValueChange = { newText ->
-                        pulseInput = newText.filter { it.isDigit() }.take(3)
-                    },
-                    label = { Text("Пульс") },
-                    modifier = Modifier.fillMaxWidth(),
-                    //colors = OutlinedTextFieldDefaults.colors(unfocusedBorderColor = Color(0xFF000000)),
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Done
-                    )
-                )
+
             }
 
             Spacer(Modifier.weight(1f))
@@ -105,15 +142,15 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
                     onClick = { onDismissRequest() },
                     modifier = Modifier.padding(8.dp),
                 ) {
-                    Text("Dismiss")
+                    Text("Отмена")
                 }
                 TextButton(
                     onClick = {
                         viewModel.addNotes(
-                            //data,
-                            lowInput.toInt(),
-                            highInput.toInt(),
-                            pulseInput.toInt()
+                            dateInput,
+                            lowInput,
+                            highInput,
+                            pulseInput
                         )
                         lowInput = ""
                         highInput = ""
@@ -122,7 +159,7 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
                     },
                     modifier = Modifier.padding(8.dp),
                 ) {
-                    Text("Confirm")
+                    Text("Добавить")
                 }
             }
         }

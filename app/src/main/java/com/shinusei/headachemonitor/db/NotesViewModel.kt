@@ -62,8 +62,11 @@ class NotesViewModel : ViewModel() {
         } else if (startRange == null && endRange != null) {
             return notesDao.getRecordsEnd(Date(endRange))
         } else {
-            return notesDao.getRecords(Date(startRange!!), Date(endRange!!))
+            if (startRange!! < endRange!!) {
+                return notesDao.getRecordsAsc(Date(startRange), Date(endRange))
+            }
         }
+        return notesDao.getRecordsDesc(Date(startRange), Date(endRange))
     }
 
     /**

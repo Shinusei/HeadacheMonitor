@@ -18,6 +18,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,7 +51,7 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(375.dp)
+                .height(280.dp)
                 .padding(5.dp),
             shape = RoundedCornerShape(16.dp),
         ) {
@@ -60,7 +61,7 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
                 OutlinedTextField(
                     value = dateInput?.let { convertMillisToDate(it) } ?: "",
                     onValueChange = {  },
-                    label = { Text("От") },
+                    label = { Text("Дата") },
                     readOnly = true,
                     modifier = Modifier.fillMaxWidth(),
                     maxLines = 1,
@@ -93,7 +94,7 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
                         onValueChange = { newText ->
                             highInput = newText.filter { it.isDigit() }.take(3)
                         },
-                        label = { Text("Верх") },
+                        label = { Text("SYS") },
                         modifier = Modifier.weight(1f),
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
@@ -106,29 +107,29 @@ fun InputDialog(onDismissRequest: () -> Unit, onConfirmRequest: () -> Unit, view
                         onValueChange = { newText ->
                             lowInput = newText.filter { it.isDigit() }.take(3)
                         },
-                        label = { Text("Низ") },
+                        label = { Text("DIA") },
                         modifier = Modifier.weight(1f),
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Next
                         ),
                     )
-                    Spacer(Modifier.width(10.dp))
+                }
+                Row {
+                    Spacer(Modifier.weight(1f))
                     OutlinedTextField(
                         value = pulseInput,
                         onValueChange = { newText ->
                             pulseInput = newText.filter { it.isDigit() }.take(3)
                         },
                         label = { Text("Пульс") },
-                        modifier = Modifier.weight(1f),
-                        //colors = OutlinedTextFieldDefaults.colors(unfocusedBorderColor = Color(0xFF000000)),
+                        modifier = Modifier.weight(1.5f),
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Done
                         )
                     )
                 }
-
             }
 
             Spacer(Modifier.weight(1f))

@@ -33,8 +33,11 @@ interface NotesDao {
     @Query("SELECT * FROM Notes")
     fun getAllRecords(): Flow<List<Notes>>
 
-    @Query("SELECT * FROM Notes WHERE date BETWEEN :startDate AND :endDate")
-    fun getRecords(startDate: Date, endDate: Date): Flow<List<Notes>>
+    @Query("SELECT * FROM Notes WHERE date BETWEEN :startDate AND :endDate ORDER BY date ASC")
+    fun getRecordsAsc(startDate: Date, endDate: Date): Flow<List<Notes>>
+
+    @Query("SELECT * FROM Notes WHERE date BETWEEN :endDate AND :startDate ORDER BY date DESC")
+    fun getRecordsDesc(startDate: Date, endDate: Date): Flow<List<Notes>>
 
     @Query("SELECT * FROM Notes WHERE date < :endDate")
     fun getRecordsEnd(endDate: Date): Flow<List<Notes>>

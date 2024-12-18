@@ -8,6 +8,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -20,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.shinusei.headachemonitor.R
 import com.shinusei.headachemonitor.db.NotesViewModel
@@ -52,11 +54,11 @@ fun Panel(viewModel: NotesViewModel) {
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    titleContentColor = MaterialTheme.colorScheme.onBackground,
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {},
-                navigationIcon = {
+                /*navigationIcon = {
                     var swapIcon by remember { mutableStateOf(false) }
                     IconButton({ swapIcon = !swapIcon }) {
                         Crossfade(
@@ -77,12 +79,13 @@ fun Panel(viewModel: NotesViewModel) {
                             }
                         }
                     }
-                },
+                },*/
                 actions = {
                     IconButton(onClick = {}) {
                         Icon(
                             painter = painterResource(id = R.drawable.rounded_download_24),
-                            contentDescription = "select date range"
+                            contentDescription = "select date range",
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }
@@ -107,7 +110,7 @@ fun Panel(viewModel: NotesViewModel) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            color = MaterialTheme.colorScheme.inverseOnSurface
+            color = MaterialTheme.colorScheme.surfaceVariant
         ) {
             MainSurface(
                 viewModel = viewModel

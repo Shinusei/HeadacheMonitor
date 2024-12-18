@@ -57,7 +57,7 @@ fun MainSurface(viewModel: NotesViewModel) {
             modifier = Modifier
                 .wrapContentSize(Alignment.TopCenter)
                 .fillMaxWidth()
-                .background(color = MaterialTheme.colorScheme.background)
+                .background(color = MaterialTheme.colorScheme.surfaceVariant)
                 .padding(start = 15.dp, end = 15.dp, bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -160,7 +160,7 @@ fun MainSurface(viewModel: NotesViewModel) {
                         Row {
                             Column {
                                 Text(
-                                    text = "sys ",
+                                    text = "SYS ",
                                     style = MaterialTheme.typography.bodySmall,
                                     textAlign = TextAlign.End,
                                     modifier = Modifier
@@ -183,7 +183,7 @@ fun MainSurface(viewModel: NotesViewModel) {
                             }
                             Column {
                                 Text(
-                                    text = "dia",
+                                    text = "DIA",
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = Modifier
                                         .padding(start = 8.dp)
@@ -198,7 +198,7 @@ fun MainSurface(viewModel: NotesViewModel) {
                             }
                             Column {
                                 Text(
-                                    text = " пульс",
+                                    text = " Пульс",
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = Modifier
                                         .padding(start = 8.dp)

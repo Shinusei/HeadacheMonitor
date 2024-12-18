@@ -14,7 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,8 +24,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import com.shinusei.headachemonitor.R
+import com.shinusei.headachemonitor.db.ExportDatabaseToCsv
 import com.shinusei.headachemonitor.db.NotesViewModel
 
 /**
@@ -43,14 +47,12 @@ import com.shinusei.headachemonitor.db.NotesViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Panel(viewModel: NotesViewModel) {
-    val primaryColor = MaterialTheme.colorScheme.surface
-    //val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    var openInputDialog = remember { mutableStateOf(false) }
-
-    var offset by remember { mutableStateOf(0f) }
+    val openInputDialog = remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
-        modifier = Modifier,
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
@@ -81,15 +83,19 @@ fun Panel(viewModel: NotesViewModel) {
                     }
                 },*/
                 actions = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {
+
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.rounded_download_24),
                             contentDescription = "select date range",
                             tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
+
         },
         floatingActionButton = {
             LargeFloatingActionButton(

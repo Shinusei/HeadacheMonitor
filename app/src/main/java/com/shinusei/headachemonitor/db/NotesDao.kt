@@ -34,7 +34,7 @@ interface NotesDao {
      *
      * @return
      */
-    @Query("SELECT * FROM Notes")
+    @Query("SELECT * FROM Notes ORDER BY date")
     fun getAllRecords(): Flow<List<Notes>>
 
     /**
@@ -63,7 +63,7 @@ interface NotesDao {
      * @param endDate
      * @return
      */
-    @Query("SELECT * FROM Notes WHERE date < :endDate")
+    @Query("SELECT * FROM Notes WHERE date < :endDate ORDER BY date")
     fun getRecordsEnd(endDate: Date): Flow<List<Notes>>
 
     /**
@@ -72,6 +72,6 @@ interface NotesDao {
      * @param startDate
      * @return
      */
-    @Query("SELECT * FROM Notes WHERE date > :startDate")
+    @Query("SELECT * FROM Notes WHERE date > :startDate ORDER BY date")
     fun getRecordsStart(startDate: Date): Flow<List<Notes>>
 }

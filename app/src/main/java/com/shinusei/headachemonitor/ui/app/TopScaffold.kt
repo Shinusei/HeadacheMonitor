@@ -1,8 +1,5 @@
 package com.shinusei.headachemonitor.ui.app
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,9 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.core.content.ContextCompat
-import com.shinusei.headachemonitor.MainActivity
 import com.shinusei.headachemonitor.R
 import com.shinusei.headachemonitor.db.ExportDataToFile
 import com.shinusei.headachemonitor.db.NotesViewModel
@@ -53,28 +47,6 @@ fun Panel(viewModel: NotesViewModel) {
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
                 ),
                 title = {},
-                /*navigationIcon = {
-                    var swapIcon by remember { mutableStateOf(false) }
-                    IconButton({ swapIcon = !swapIcon }) {
-                        Crossfade(
-                            label = "Crossfade",
-                            targetState = swapIcon,
-                            animationSpec = tween(durationMillis = 300)
-                        ) { showFirst ->
-                            if (showFirst) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.rounded_calendar_month_24),
-                                    contentDescription = "Вид календарь"
-                                )
-                            } else {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.rounded_lists_24),
-                                    contentDescription = "Вид списка"
-                                )
-                            }
-                        }
-                    }
-                },*/
                 actions = {
                     IconButton(onClick = {
                         exportDataToFile.value = !exportDataToFile.value

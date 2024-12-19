@@ -1,9 +1,7 @@
 package com.shinusei.headachemonitor.db
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shinusei.headachemonitor.ui.app.convertMillisToDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

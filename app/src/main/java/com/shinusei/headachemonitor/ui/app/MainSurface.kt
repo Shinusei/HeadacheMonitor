@@ -14,7 +14,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,31 +38,23 @@ import com.shinusei.headachemonitor.db.NotesViewModel
 import java.util.Date
 import java.util.Locale
 
-/**
- * Компонуемый элемент, представляющий основную поверхность экрана.
- *
- * Этот элемент содержит строку выбора дат ([DatePickersRow]) и заполнитель для будущего элемента "shower".
- *
- * @see DatePickersRow
- */
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun MainSurface(viewModel: NotesViewModel) {
     var startRange by remember { mutableStateOf<Long?>(null) }
-    var showDatePickerStart = remember { mutableStateOf(false) }
+    val showDatePickerStart = remember { mutableStateOf(false) }
     var endRange by remember { mutableStateOf<Long?>(null) }
-    var showDatePickerEnd = remember { mutableStateOf(false) }
+    val showDatePickerEnd = remember { mutableStateOf(false) }
 
     Column {
         Row(
             modifier = Modifier
                 .wrapContentSize(Alignment.TopCenter)
                 .fillMaxWidth()
-                .background(color = MaterialTheme.colorScheme.surfaceVariant)
+                .background(color = MaterialTheme.colorScheme.surfaceContainer)
                 .padding(start = 15.dp, end = 15.dp, bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             OutlinedTextField(
                 value = startRange?.let { convertMillisToDate(it) } ?: "",
                 onValueChange = {  },
@@ -140,6 +133,7 @@ fun MainSurface(viewModel: NotesViewModel) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(all = 16.dp)
+                //.background(color = MaterialTheme.colorScheme.secondaryContainer)
         ) {
             items(dataList.value.size) { note ->
                 val data = dataList.value[note].date
@@ -148,84 +142,102 @@ fun MainSurface(viewModel: NotesViewModel) {
                     Locale("ru", "RU")
                 )
                 val dayOfWeekString = simpleDateFormat.format(data)
-
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Column {
-                        Text(
-                            text = "${convertMillisToDate(data.time)}  $dayOfWeekString",
-                            style = MaterialTheme.typography.headlineSmall,
-                            modifier = Modifier
-                                .padding(bottom = 8.dp, top = 8.dp, start = 5.dp)
-                        )
-                        Row {
-                            Column {
-                                Text(
-                                    text = "SYS ",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    textAlign = TextAlign.End,
-                                    modifier = Modifier
-                                        //.padding(start = 20.dp)
-                                        .wrapContentSize(Alignment.CenterEnd)
-                                        .width(45.dp)
-                                )
-                                Text(
-                                    text = "${if(dataList.value[note].highPressure==-1) "-" else (dataList.value[note].highPressure) } ",
-                                    style = MaterialTheme.typography.titleLarge,
-                                    textAlign = TextAlign.End,
-                                    modifier = Modifier
-                                        .padding(start = 5.dp, bottom = 5.dp)
-                                        .width(45.dp)
-                                )
-                            }
-                            Column {
-                                Text("/",style = MaterialTheme.typography.bodySmall)
-                                Text("/",style = MaterialTheme.typography.titleLarge)
-                            }
-                            Column {
-                                Text(
-                                    text = "DIA",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    modifier = Modifier
-                                        .padding(start = 8.dp)
-                                        .wrapContentSize(Alignment.CenterEnd)
-                                )
-                                Text(
-                                    text = "${if(dataList.value[note].lowPressure==-1) "-" else (dataList.value[note].lowPressure) } ",
-                                    style = MaterialTheme.typography.titleLarge,
-                                    modifier = Modifier
-                                        .padding(start = 5.dp, bottom = 5.dp)
-                                )
-                            }
-                            Column {
-                                Text(
-                                    text = " Пульс",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    modifier = Modifier
-                                        .padding(start = 8.dp)
-                                        .wrapContentSize(Alignment.CenterEnd)
-                                )
-                                Text(
-                                    text = " ${if(dataList.value[note].pulse==-1) "-" else (dataList.value[note].pulse) } ",
-                                    style = MaterialTheme.typography.titleLarge,
-                                    modifier = Modifier
-                                        .padding(start = 5.dp, bottom = 5.dp)
-                                )
+                Card (
+                    modifier = Modifier
+                        .padding(10.dp),
+                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondaryContainer),
+                ){
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Column {
+                            Text(
+                                text = "${convertMillisToDate(data.time)}  $dayOfWeekString",
+                                style = MaterialTheme.typography.headlineSmall,
+                                modifier = Modifier
+                                    .padding(bottom = 8.dp, top = 8.dp, start = 5.dp),
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                            Row {
+                                Column {
+                                    Text(
+                                        text = "SYS ",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        textAlign = TextAlign.End,
+                                        modifier = Modifier
+                                            //.padding(start = 20.dp)
+                                            .wrapContentSize(Alignment.CenterEnd)
+                                            .width(45.dp),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                    Text(
+                                        text = "${if (dataList.value[note].highPressure == -1) "-" else (dataList.value[note].highPressure)} ",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        textAlign = TextAlign.End,
+                                        modifier = Modifier
+                                            .padding(start = 5.dp, bottom = 5.dp)
+                                            .width(45.dp),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                }
+                                Column {
+                                    Text("/",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                    Text("/",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                }
+                                Column {
+                                    Text(
+                                        text = "DIA",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier
+                                            .padding(start = 8.dp)
+                                            .wrapContentSize(Alignment.CenterEnd),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                    Text(
+                                        text = "${if (dataList.value[note].lowPressure == -1) "-" else (dataList.value[note].lowPressure)} ",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        modifier = Modifier
+                                            .padding(start = 5.dp, bottom = 5.dp),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                }
+                                Column {
+                                    Text(
+                                        text = " Пульс",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        modifier = Modifier
+                                            .padding(start = 8.dp)
+                                            .wrapContentSize(Alignment.CenterEnd),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                    Text(
+                                        text = " ${if (dataList.value[note].pulse == -1) "-" else (dataList.value[note].pulse)} ",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        modifier = Modifier
+                                            .padding(start = 5.dp, bottom = 5.dp),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                }
                             }
                         }
-                    }
-                    IconButton(
-                        onClick = {
-                            viewModel.deleteNotes(dataList.value[note].id)
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentSize(Alignment.CenterEnd)
-                            .align(Alignment.CenterVertically)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.round_delete_outline_24),
-                            contentDescription = "delete note"
-                        )
+                        IconButton(
+                            onClick = {
+                                viewModel.deleteNotes(dataList.value[note].id)
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentSize(Alignment.CenterEnd)
+                                .align(Alignment.CenterVertically)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.round_delete_outline_24),
+                                contentDescription = "delete note"
+                            )
+                        }
                     }
                 }
                 HorizontalDivider()

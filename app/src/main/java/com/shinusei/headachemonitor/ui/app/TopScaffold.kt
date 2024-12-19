@@ -31,6 +31,11 @@ import com.shinusei.headachemonitor.R
 import com.shinusei.headachemonitor.db.ExportDataToFile
 import com.shinusei.headachemonitor.db.NotesViewModel
 
+/**
+ * Panel
+ *
+ * @param viewModel
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Panel(viewModel: NotesViewModel) {

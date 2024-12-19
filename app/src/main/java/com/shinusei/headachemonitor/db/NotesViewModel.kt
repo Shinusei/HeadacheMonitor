@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 
-
 /**
  * Notes view model
  *
@@ -20,6 +19,7 @@ class NotesViewModel : ViewModel() {
     /**
      * Add notes
      *
+     * @param dateInput
      * @param lowPressure
      * @param highPressure
      * @param pulse
@@ -52,6 +52,14 @@ class NotesViewModel : ViewModel() {
             )
         }
     }
+
+    /**
+     * Get all notes
+     *
+     * @param startRange
+     * @param endRange
+     * @return
+     */
     fun getAllNotes(startRange: Long?, endRange: Long?): Flow<List<Notes>> {
         if (startRange == null && endRange == null) {
             return notesDao.getAllRecords()

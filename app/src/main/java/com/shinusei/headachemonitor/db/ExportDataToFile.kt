@@ -13,6 +13,12 @@ import androidx.compose.ui.platform.LocalContext
 import java.io.File
 import java.io.FileOutputStream
 
+/**
+ * Export data to file
+ *
+ * @param context
+ * @param data
+ */
 @Composable
 fun ExportDataToFile(context: Context, data: String) {
     /*val db = context.openOrCreateDatabase(data, Context.MODE_PRIVATE, null)

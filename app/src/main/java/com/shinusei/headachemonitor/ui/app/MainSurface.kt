@@ -39,6 +39,11 @@ import java.util.Date
 import java.util.Locale
 
 
+/**
+ * Main surface
+ *
+ * @param viewModel
+ */
 @Composable
 fun MainSurface(viewModel: NotesViewModel) {
     var startRange by remember { mutableStateOf<Long?>(null) }
@@ -249,6 +254,12 @@ fun MainSurface(viewModel: NotesViewModel) {
     }
 }
 
+/**
+ * Convert millis to date
+ *
+ * @param millis
+ * @return
+ */
 fun convertMillisToDate(millis: Long): String {
     val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     return formatter.format(Date(millis))

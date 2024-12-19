@@ -8,6 +8,14 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 
+/**
+ * Date picker modal
+ *
+ * @param onDateSelected
+ * @param onDismiss
+ * @receiver
+ * @receiver
+ */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun DatePickerModal(

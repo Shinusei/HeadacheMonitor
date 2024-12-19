@@ -29,18 +29,49 @@ interface NotesDao {
     @Query("DELETE FROM Notes WHERE id = :id")
     fun deleteNotes(id: Int)
 
+    /**
+     * Get all records
+     *
+     * @return
+     */
     @Query("SELECT * FROM Notes")
     fun getAllRecords(): Flow<List<Notes>>
 
+    /**
+     * Get records asc
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     @Query("SELECT * FROM Notes WHERE date BETWEEN :startDate AND :endDate ORDER BY date ASC")
     fun getRecordsAsc(startDate: Date, endDate: Date): Flow<List<Notes>>
 
+    /**
+     * Get records desc
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     @Query("SELECT * FROM Notes WHERE date BETWEEN :endDate AND :startDate ORDER BY date DESC")
     fun getRecordsDesc(startDate: Date, endDate: Date): Flow<List<Notes>>
 
+    /**
+     * Get records end
+     *
+     * @param endDate
+     * @return
+     */
     @Query("SELECT * FROM Notes WHERE date < :endDate")
     fun getRecordsEnd(endDate: Date): Flow<List<Notes>>
 
+    /**
+     * Get records start
+     *
+     * @param startDate
+     * @return
+     */
     @Query("SELECT * FROM Notes WHERE date > :startDate")
     fun getRecordsStart(startDate: Date): Flow<List<Notes>>
 }
